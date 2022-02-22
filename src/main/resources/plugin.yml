@@ -1,0 +1,9 @@
+name: CubeLifeMainSystem
+version: '${project.version}'
+main: eu.mindcreation.cubelifemainsystem.CubeLifeMainSystem
+api-version: 1.18
+
+commands:
+  spawn:
+    description: Teleportiere dich zum Spawn
+    usage: /spawn
