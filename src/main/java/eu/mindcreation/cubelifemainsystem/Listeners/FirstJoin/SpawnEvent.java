@@ -1,10 +1,7 @@
 package eu.mindcreation.cubelifemainsystem.Listeners.FirstJoin;
 
 import eu.mindcreation.cubelifemainsystem.CubeLifeMainSystem;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Sound;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -30,7 +27,7 @@ public class SpawnEvent implements Listener {
                         player.teleport(spawn);
                     }
                 }
-            }.runTaskLater(CubeLifeMainSystem.getPlugin(CubeLifeMainSystem.class), 60);
+            }.runTaskLater(CubeLifeMainSystem.getPlugin(CubeLifeMainSystem.class), 20);
         } else {
             player.sendMessage("§b§lMindCreation §7| Herzlich Willkommen zurück auf CubeLife §b" + player.getName() + "§7!");
             player.playSound(player, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 100, 0);
