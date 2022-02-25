@@ -1,7 +1,6 @@
 package eu.mindcreation.cubelifemainsystem;
 
 import eu.mindcreation.cubelifemainsystem.Commands.SpawnCommand;
-import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.Config.Config;
 import eu.mindcreation.cubelifemainsystem.Listeners.FirstJoin.SpawnEvent;
 import eu.mindcreation.cubelifemainsystem.MainIsland.Shops.JokoNPC;
 import eu.mindcreation.cubelifemainsystem.WarpNPCs.*;
@@ -15,7 +14,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 public final class CubeLifeMainSystem extends JavaPlugin {
 
     public static Economy econ = null;
-    public static Config config;
 
     @Override
     public void onEnable() {
@@ -27,7 +25,7 @@ public final class CubeLifeMainSystem extends JavaPlugin {
         }
 
         //Config GS
-        config = new Config();
+
 
         //Listeners
 
