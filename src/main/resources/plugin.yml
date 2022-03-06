@@ -6,3 +6,5 @@ commands:
   spawn:
     description: Teleportiere dich zum Spawn
     usage: /spawn
+  gsset:
+  gsclaim:

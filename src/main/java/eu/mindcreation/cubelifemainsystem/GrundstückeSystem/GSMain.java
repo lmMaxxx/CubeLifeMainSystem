@@ -2,9 +2,9 @@ package eu.mindcreation.cubelifemainsystem.GrundstückeSystem;
 
 
 import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api.ChunkConfig;
-import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api.GSManager;
 import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api.GSPlayerManager;
-import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.management.ChunkLoaderManagment;
+import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.management.ChunkLoaderManagement;
+import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.management.SimpleGSManager;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.Plugin;
@@ -20,7 +20,8 @@ public class GSMain {
         Bukkit.getScheduler().runTask(plugin, () -> {
             mainWorld = Bukkit.getWorld("");
 
-            config = new ChunkLoaderManagment();
+            playerManager = new SimpleGSManager();
+            config = new ChunkLoaderManagement();
         });
     }
 

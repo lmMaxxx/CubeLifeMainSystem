@@ -2,13 +2,12 @@ package eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api;
 
 import javax.annotation.Nonnull;
 
-public interface IChunk extends ILoader {
+public interface IChunk<T> extends ILoader<T> {
 
     @Nonnull
-    GS getMainGS();
+    GS<?> getMainGS();
 
     int getChunkX();
 
     int getChunkZ();
-
 }

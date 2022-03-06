@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public interface GSPlayerManager extends GSManager {
 
-    GS getGSByPlayer(Player player);
+    GS<?> getGSByPlayer(Player player);
 
     void unregister(Player player);
 

@@ -9,11 +9,11 @@ public interface GSManager {
 //
 //    void removeGS(GS gs);
 
-    GS getGSByChunk(int chunkX, int chunkZ);
+    GS<?> getGSByChunk(int chunkX, int chunkZ);
 
-    GS createChunk(int chunkX, int chunkZ, int costs, Direction direction);
+    GS<?> createChunk(int chunkX, int chunkZ, int costs, Direction direction);
 
-    default GS createChunk(Chunk chunk, int costs, Direction direction) {
+    default GS<?> createChunk(Chunk chunk, int costs, Direction direction) {
         return createChunk(chunk.getX(), chunk.getZ(), costs, direction);
     }
 }

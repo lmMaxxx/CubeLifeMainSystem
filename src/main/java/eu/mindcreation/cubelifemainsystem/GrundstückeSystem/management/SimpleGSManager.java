@@ -7,10 +7,10 @@ import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api.GSPlayerManager
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-
+//FÜR CACHE
 public class SimpleGSManager implements GSPlayerManager {
 
-    private final ArrayList<GS> gsCache;
+    private final ArrayList<GS<?>> gsCache;
 
     public SimpleGSManager() {
         gsCache = new ArrayList<>();
@@ -27,30 +27,34 @@ public class SimpleGSManager implements GSPlayerManager {
 //    }
 
     @Override
-    public GS getGSByChunk(int chunkX, int chunkZ) {
-
+    public GS<?> getGSByChunk(int chunkX, int chunkZ) {
+        for (GS<?> gs : gsCache) {
+            if(gs.getChunkX() == chunkX && gs.getChunkZ() == chunkZ) {
+                return gs;
+            }
+        }
         return null;
     }
 
     @Override
-    public GS createChunk(int chunkX, int chunkZ, int costs, Direction direction) {
+    public GS<?> createChunk(int chunkX, int chunkZ, int costs, Direction direction) {
         if(isClaimed(chunkX, chunkZ)) return null;
 
-        GS gs = new SimpleGs(chunkX, chunkZ, costs, direction);
+        GS<?> gs = new SimpleGs(chunkX, chunkZ, costs, direction);
         gsCache.add(gs);
 
         return gs;
     }
 
     @Override
-    public GS getGSByPlayer(Player player) {
+    public GS<?> getGSByPlayer(Player player) {
         if(player == null) return null;
         return GSMain.getConfig().getByPlayer(player);
     }
 
     @Override
     public void unregister(Player player) {
-        GS gs;
+        GS<?> gs;
         if((gs = getGSByPlayer(player)) != null && gsCache.contains(gs)) {
             gsCache.remove(gs);
         }

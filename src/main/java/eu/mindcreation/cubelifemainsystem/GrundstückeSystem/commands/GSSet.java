@@ -22,7 +22,6 @@ public class GSSet implements CommandExecutor {
                     return false;
                 }
 
-
                 if(!isInt(args[0])) {
                     player.sendMessage("§cBitte gebe einen Richtigen Wert ein!");
                     return false;
@@ -38,14 +37,13 @@ public class GSSet implements CommandExecutor {
                 }
 
                 if(!GSMain.getPlayerManager().isClaimed(chunk)) {
-                    GS gs = GSMain.getPlayerManager().createChunk(chunk, costs, direction);
+                    GS<?> gs = GSMain.getPlayerManager().createChunk(chunk, costs, direction);
                     if(gs == null) {
                         player.sendMessage("§cEtwas ist schiefgelaufen...");
                         return false;
                     }
 
-
-
+                    GSMain.getConfig().saveChunk(gs);
                 } else {
                     player.sendMessage("§cDieser Chunk ist schon geclaimt!");
                 }

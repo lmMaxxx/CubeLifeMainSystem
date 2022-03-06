@@ -1,7 +1,6 @@
 package eu.mindcreation.cubelifemainsystem.GrundstückeSystem.management;
 
 import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.Direction;
-import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.GSMain;
 import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api.GS;
 import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.api.IChunk;
 import org.bukkit.Chunk;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 
-public class SimpleGs implements GS {
+public class SimpleGs implements GS<SimpleGs> {
 
     private final int chunkX;
     private final int chunkZ;
@@ -22,7 +21,7 @@ public class SimpleGs implements GS {
     private boolean bought;
     private UUID owner;
 
-    private ArrayList<IChunk> externalChunks = new ArrayList<>(9);
+    private ArrayList<IChunk<?>> externalChunks = new ArrayList<>(9);
 
     public SimpleGs(int chunkX, int chunkZ, int costs, Direction direction) {
         this.chunkX = chunkX;
@@ -57,7 +56,7 @@ public class SimpleGs implements GS {
     }
 
     @Override
-    public ArrayList<IChunk> getExternalChunks() {
+    public ArrayList<IChunk<?>> getExternalChunks() {
         return externalChunks;
     }
 
@@ -82,7 +81,12 @@ public class SimpleGs implements GS {
     }
 
     @Override
-    public GS load(YamlConfiguration config, String path) {
+    public void setOwner(UUID uuid) {
+        this.owner = uuid;
+    }
+
+    @Override
+    public SimpleGs load(YamlConfiguration config, String path) {
         costs = config.getInt(path + ".costs");
         direction = Direction.valueOf(config.getString(path + ".direction"));
         bought = config.getBoolean(path + ".bought");

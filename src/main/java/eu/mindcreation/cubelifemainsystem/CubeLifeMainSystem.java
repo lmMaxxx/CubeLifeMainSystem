@@ -1,6 +1,8 @@
 package eu.mindcreation.cubelifemainsystem;
 
 import eu.mindcreation.cubelifemainsystem.Commands.SpawnCommand;
+import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.commands.GSClaim;
+import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.commands.GSSet;
 import eu.mindcreation.cubelifemainsystem.Listeners.FirstJoin.SpawnEvent;
 import eu.mindcreation.cubelifemainsystem.MainIsland.Shops.JokoNPC;
 import eu.mindcreation.cubelifemainsystem.WarpNPCs.*;
@@ -50,7 +52,8 @@ public final class CubeLifeMainSystem extends JavaPlugin {
 
         //Commands
         this.getCommand("spawn").setExecutor(new SpawnCommand());
-
+        getCommand("setgs").setExecutor(new GSSet());
+        getCommand("gsclaim").setExecutor(new GSClaim());
     }
 
     private boolean setupEconomy() {

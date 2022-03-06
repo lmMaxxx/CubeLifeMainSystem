@@ -5,14 +5,14 @@ import eu.mindcreation.cubelifemainsystem.GrundstückeSystem.Direction;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public interface GS extends ILoader {
+public interface GS<T> extends ILoader<T> {
     int getChunkX();
 
     int getChunkZ();
 
     int getCosts();
 
-    ArrayList<IChunk> getExternalChunks();
+    ArrayList<IChunk<?>> getExternalChunks();
 
     Direction getDirection();
 
@@ -21,4 +21,6 @@ public interface GS extends ILoader {
     boolean isBought();
 
     UUID getOwner();
+
+    void setOwner(UUID uuid);
 }

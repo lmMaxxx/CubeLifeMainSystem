@@ -9,17 +9,17 @@ import org.bukkit.entity.Player;
 import java.io.File;
 import java.io.IOException;
 
-public class ChunkLoaderManagment implements ChunkConfig {
+public class ChunkLoaderManagement implements ChunkConfig {
 
     private final File file = new File("plugins/cubelife/chunks.yml");
     private final YamlConfiguration yamlConfiguration = YamlConfiguration.loadConfiguration(file);
 
     @Override
-    public GS loadChunk(int chunkX, int chunkZ) {
+    public GS<SimpleGs> loadChunk(int chunkX, int chunkZ) {
         String path = chunkX + ":" + chunkZ;
 
         if(yamlConfiguration.get(path) != null) {
-            GS gs = new SimpleGs(chunkX, chunkZ, -1, null);
+            GS<SimpleGs> gs = new SimpleGs(chunkX, chunkZ, -1, null);
 
             gs = gs.load(yamlConfiguration, path);
             return gs;
@@ -29,7 +29,7 @@ public class ChunkLoaderManagment implements ChunkConfig {
     }
 
     @Override
-    public void saveChunk(GS gs) {
+    public void saveChunk(GS<?> gs) {
         gs.save(yamlConfiguration, "");
 
         try {
@@ -40,7 +40,7 @@ public class ChunkLoaderManagment implements ChunkConfig {
     }
 
     @Override
-    public GS getByPlayer(Player player) {
+    public GS<?> getByPlayer(Player player) {
         for(String x : yamlConfiguration.getKeys(false)) {
             ConfigurationSection conf = yamlConfiguration.getConfigurationSection(x);
 
@@ -53,11 +53,26 @@ public class ChunkLoaderManagment implements ChunkConfig {
     }
 
     @Override
+    public void claimGS(GS<?> gs, Player player) {
+        gs.setBought();
+        gs.setOwner(player.getUniqueId());
+        saveChunk(gs);
+    }
+
+    @Override
     public boolean isClaimed(int chunkX, int chunkZ) {
         return yamlConfiguration.get(chunkX + ":" + chunkX) != null;
     }
 
-    private GS loadChunk(String x) {
+    @Override
+    public boolean isClaimedByPlayer(int chunkX, int chunkZ) {
+        if(isClaimed(chunkX, chunkZ)) {
+            return yamlConfiguration.getBoolean(chunkX + ":" + chunkZ + ".bought");
+        }
+        return false;
+    }
+
+    private GS<?> loadChunk(String x) {
         String[] split = x.split(":");
         return loadChunk(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
     }
